@@ -7,6 +7,7 @@
 
 #include "Sheduler.h"
 #include "sched.h"
+#define TICK 10
 
 sTask SCH_tasks_G[SCH_MAX_TASKS];
 void SCH_Init(void){
@@ -50,9 +51,10 @@ unsigned char SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD)
 	    }
 	    // If we're here, there is a space in the task array
 	    SCH_tasks_G[Index].pTask = pFunction;
-	    SCH_tasks_G[Index].Delay = DELAY;
-	    SCH_tasks_G[Index].Period = PERIOD;
+	    SCH_tasks_G[Index].Delay = DELAY/TICK;
+	    SCH_tasks_G[Index].Period = PERIOD/TICK;
 	    SCH_tasks_G[Index].RunMe = 0;
+	    SCH_tasks_G[Index].TaskID = Index;
 	    // return position of task (to allow later deletion)
 	    return Index;
 }

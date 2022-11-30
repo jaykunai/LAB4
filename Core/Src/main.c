@@ -25,6 +25,7 @@
 #include "sched.h"
 #include "Sheduler.h"
 #include "timer.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,6 +74,11 @@ void func4(void){
 void func5(void){
 	HAL_GPIO_TogglePin(LED5_GPIO_Port, LED5_Pin);
 }
+void func6(void){
+	if(is_button_pressed(0)){
+		HAL_GPIO_TogglePin(LED5_GPIO_Port, LED5_Pin);
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -106,20 +112,23 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  SCH_Init();
-  SCH_Add_Task(func1, 10, 50);
-  SCH_Add_Task(func2, 20, 100);
-  SCH_Add_Task(func3, 30, 150);
-  SCH_Add_Task(func4, 40, 200);
-  SCH_Add_Task(func5, 50, 250);
+//  SCH_Init();
+//  SCH_Add_Task(func1, 200, 5000);
+//  SCH_Add_Task(func2, 300, 1000);
+//  SCH_Add_Task(func3, 400, 1500);
+//  SCH_Add_Task(func4, 500, 2000);
+  SCH_Add_Task(func5, 2500, 0);
+  SCH_Add_Task(button_reading, 10, 10);
+  SCH_Add_Task(func6, 100, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 	  SCH_Dispatch_Tasks();
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -229,6 +238,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BUTTON_0_Pin */
+  GPIO_InitStruct.Pin = BUTTON_0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BUTTON_0_GPIO_Port, &GPIO_InitStruct);
 
 }
 

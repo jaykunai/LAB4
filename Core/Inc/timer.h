@@ -8,6 +8,8 @@
 #ifndef INC_TIMER_H_
 #define INC_TIMER_H_
 #include "main.h"
+#include "Sheduler.h"
+#include "button.h"
 
 extern int timer1_flag;
 extern int timer2_flag;
