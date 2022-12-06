@@ -113,12 +113,19 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   SCH_Init();
+  //this period task = 0.5s
   SCH_Add_Task(func1, 20, 500);
+  //this period task = 1s
   SCH_Add_Task(func2, 30, 1000);
+  //this period task = 1.5s
   SCH_Add_Task(func3, 40, 1500);
+  //this period task = 2s
   SCH_Add_Task(func4, 50, 2000);
+  //this period task = 2.5s, and this is one-short task
   SCH_Add_Task(func5, 2500, 0);
+  //manage button
   SCH_Add_Task(button_reading, 10, 10);
+  //this task use button to blink led
   SCH_Add_Task(func6, 100, 10);
   /* USER CODE END 2 */
 

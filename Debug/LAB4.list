@@ -1008,36 +1008,43 @@ int main(void)
  8000726:	f001 f961 	bl	80019ec <HAL_TIM_Base_Start_IT>
   SCH_Init();
  800072a:	f7ff fd0f 	bl	800014c <SCH_Init>
+  //this period task = 0.5s
   SCH_Add_Task(func1, 20, 500);
  800072e:	f44f 72fa 	mov.w	r2, #500	; 0x1f4
  8000732:	2114      	movs	r1, #20
  8000734:	4814      	ldr	r0, [pc, #80]	; (8000788 <main+0x78>)
  8000736:	f7ff fd8f 	bl	8000258 <SCH_Add_Task>
+  //this period task = 1s
   SCH_Add_Task(func2, 30, 1000);
  800073a:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
  800073e:	211e      	movs	r1, #30
  8000740:	4812      	ldr	r0, [pc, #72]	; (800078c <main+0x7c>)
  8000742:	f7ff fd89 	bl	8000258 <SCH_Add_Task>
+  //this period task = 1.5s
   SCH_Add_Task(func3, 40, 1500);
  8000746:	f240 52dc 	movw	r2, #1500	; 0x5dc
  800074a:	2128      	movs	r1, #40	; 0x28
  800074c:	4810      	ldr	r0, [pc, #64]	; (8000790 <main+0x80>)
  800074e:	f7ff fd83 	bl	8000258 <SCH_Add_Task>
+  //this period task = 2s
   SCH_Add_Task(func4, 50, 2000);
  8000752:	f44f 62fa 	mov.w	r2, #2000	; 0x7d0
  8000756:	2132      	movs	r1, #50	; 0x32
  8000758:	480e      	ldr	r0, [pc, #56]	; (8000794 <main+0x84>)
  800075a:	f7ff fd7d 	bl	8000258 <SCH_Add_Task>
+  //this period task = 2.5s, and this is one-short task
   SCH_Add_Task(func5, 2500, 0);
  800075e:	2200      	movs	r2, #0
  8000760:	f640 11c4 	movw	r1, #2500	; 0x9c4
  8000764:	480c      	ldr	r0, [pc, #48]	; (8000798 <main+0x88>)
  8000766:	f7ff fd77 	bl	8000258 <SCH_Add_Task>
+  //manage button
   SCH_Add_Task(button_reading, 10, 10);
  800076a:	220a      	movs	r2, #10
  800076c:	210a      	movs	r1, #10
  800076e:	480b      	ldr	r0, [pc, #44]	; (800079c <main+0x8c>)
  8000770:	f7ff fd72 	bl	8000258 <SCH_Add_Task>
+  //this task use button to blink led
   SCH_Add_Task(func6, 100, 10);
  8000774:	220a      	movs	r2, #10
  8000776:	2164      	movs	r1, #100	; 0x64
