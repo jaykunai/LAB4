@@ -112,14 +112,14 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-//  SCH_Init();
-//  SCH_Add_Task(func1, 200, 5000);
-//  SCH_Add_Task(func2, 300, 1000);
-//  SCH_Add_Task(func3, 400, 1500);
-//  SCH_Add_Task(func4, 500, 2000);
+  SCH_Init();
+  SCH_Add_Task(func1, 20, 500);
+  SCH_Add_Task(func2, 30, 1000);
+  SCH_Add_Task(func3, 40, 1500);
+  SCH_Add_Task(func4, 50, 2000);
   SCH_Add_Task(func5, 2500, 0);
   SCH_Add_Task(button_reading, 10, 10);
-  SCH_Add_Task(func6, 100, 1000);
+  SCH_Add_Task(func6, 100, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
